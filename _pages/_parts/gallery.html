@@ -1,0 +1,24 @@
+<section>
+  <h2>{{ page.title }} photo gallery</h2>
+  {% if sport.photos.size > 0 %}
+    <div class="photo-grid">
+      {% for photo in sport.photos %}
+        <figure>
+          <a class="enlarge" href="{{ photo.image | relative_url }}"
+            ><img loading="lazy" src="{{ photo.image | relative_url }}" alt="{{ photo.alt | escape }}"
+          ></a>
+          {%- if photo.caption %}
+            <figcaption>{{ photo.caption | escape }}</figcaption>
+          {% endif %}
+        </figure>
+      {% endfor %}
+    </div>
+    <dialog class="photo-dialog" aria-label="Enlarged photograph">
+      <button type="button">Close photo</button><img alt="">
+      <p></p>
+    </dialog>
+    <script defer src="{{ '/assets/js/portfolio-gallery.js' | relative_url }}"></script>
+  {% else %}
+    <p class="pending">Competition and team photos to come.</p>
+  {% endif %}
+</section>

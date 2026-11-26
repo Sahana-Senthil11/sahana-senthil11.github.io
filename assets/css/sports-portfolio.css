@@ -1,0 +1,252 @@
+.recruit {
+  --rule: var(--global-divider-color, #c7c7c7);
+  --accent: var(--global-theme-color, #87318c);
+  color: var(--global-text-color, #242428);
+  font-family: Roboto, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.recruit header {
+  position: relative;
+}
+.recruit h1,
+.recruit h2,
+.recruit h3 {
+  color: inherit;
+  line-height: 1.08;
+}
+.recruit h1 {
+  margin: 0.45rem 0 0.75rem;
+  font-size: clamp(2.8rem, 7vw, 5.25rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+}
+.recruit h2 {
+  margin: 0 0 1.2rem;
+  font-size: clamp(1.65rem, 4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+}
+.recruit h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1.22rem;
+  font-weight: 600;
+}
+.recruit section {
+  border-top: 1px solid var(--rule);
+  margin-top: 2.6rem;
+  padding-top: 1.8rem;
+}
+.recruit .kicker {
+  color: var(--accent);
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 0.11em;
+}
+.recruit .leadline {
+  max-width: 44rem;
+  font-size: clamp(1.18rem, 2.5vw, 1.5rem);
+}
+.recruit .intro {
+  display: grid;
+  align-items: center;
+  grid-template-columns: minmax(0, 1fr) minmax(9rem, 27%);
+  gap: 2rem;
+  padding-block: 1rem;
+}
+.recruit .portrait {
+  margin: 0;
+  display: grid;
+  align-content: center;
+  text-align: center;
+  aspect-ratio: 4/5;
+  background: #eee6f0;
+  color: #503356;
+}
+.recruit .portrait span {
+  font-family: "Roboto Slab", Georgia, serif;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 1.2;
+}
+.recruit figcaption {
+  font-size: 0.9rem;
+}
+.recruit .portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.recruit .sports-links,
+.recruit .photo-grid,
+.recruit .honors {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+}
+.recruit .sports-links {
+  margin-top: 2rem;
+}
+.recruit .sports-links a,
+.recruit .sport-cover {
+  overflow: hidden;
+  position: relative;
+  background: #202024;
+  color: white;
+  isolation: isolate;
+}
+.recruit .sports-links a {
+  display: flex;
+  align-items: end;
+  min-height: clamp(9rem, 19vw, 15rem);
+  padding: 1.25rem;
+  text-decoration: none;
+}
+.recruit .sports-links img,
+.recruit .sport-cover img {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.58;
+}
+.recruit .sports-links strong {
+  font-size: 1.8rem;
+}
+.recruit .sport-cover {
+  display: grid;
+  align-items: end;
+  min-height: clamp(13rem, 30vw, 19rem);
+  padding: clamp(1rem, 4vw, 2.5rem);
+}
+.recruit .sport-cover .kicker {
+  color: white;
+}
+.recruit .facts,
+.recruit .metrics {
+  display: grid;
+  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr));
+}
+.recruit .facts:empty,
+.recruit .metrics:empty {
+  display: none;
+}
+.recruit .metrics div,
+.recruit .honors article {
+  border: 1px solid var(--rule);
+  padding: 1rem;
+}
+.recruit dt {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.recruit dd {
+  margin: 0.2rem 0 0;
+  font-weight: 600;
+}
+.recruit .metrics dd {
+  font-size: 1.4rem;
+}
+.recruit .external-profile {
+  display: inline-block;
+  padding: 0.35rem 0.8rem 0.35rem 0;
+}
+.recruit .pending {
+  border-left: 3px solid var(--rule);
+  padding: 0.45rem 0.85rem;
+}
+.recruit .scroll-table {
+  overflow-x: auto;
+}
+.recruit table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.recruit th,
+.recruit td {
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.7rem;
+}
+.recruit th {
+  font-weight: 600;
+}
+.recruit .progression {
+  padding-block: 1rem;
+}
+.recruit .progression div {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 0.6rem;
+}
+.recruit meter {
+  width: 100%;
+}
+.recruit .photo-grid img,
+.recruit .team img,
+.recruit .honors img,
+.recruit .reel img {
+  width: 100%;
+  max-height: 24rem;
+  object-fit: contain;
+}
+.recruit iframe {
+  border: 0;
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+.recruit .photo-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(90vw, 60rem);
+  max-height: 90vh;
+  background: var(--global-bg-color, white);
+  color: inherit;
+  padding: 1rem;
+}
+.recruit .photo-dialog::backdrop {
+  background: rgb(0 0 0 / 78%);
+}
+.recruit .photo-dialog img {
+  display: block;
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+}
+.recruit .photo-dialog button {
+  display: block;
+  margin: 0 0 0.75rem auto;
+  padding: 0.4rem 0.7rem;
+  border: 1px solid currentColor;
+}
+.recruit :focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .recruit .sports-links img {
+    transition: transform 0.2s ease;
+  }
+  .recruit .sports-links a:is(:hover, :focus-visible) img {
+    transform: scale(1.035);
+  }
+}
+@media (max-width: 36rem) {
+  .recruit .intro {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .recruit .portrait {
+    width: 10rem;
+  }
+  .recruit .sports-links {
+    grid-template-columns: 1fr 1fr;
+  }
+}

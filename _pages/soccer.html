@@ -1,0 +1,120 @@
+---
+layout: default
+title: Soccer
+permalink: /soccer/
+description: Soccer player profile, teams, season statistics, highlight reels, and photographs for college recruiters.
+nav: true
+nav_order: 1
+sport: soccer
+profile_heading: Player profile
+cover: /assets/img/soccer/pitch.jpg
+---
+{% include_relative _parts/start.html %}
+<div class="recruit">
+  {% include_relative _parts/sport-intro.html %}
+  <section>
+    <h2>Highlight reels</h2>
+    {% for reel in sport.reels %}
+      <article class="reel">
+        <h3>{{ reel.title | escape }}</h3>
+        {% if reel.youtube_id -%}
+          <iframe
+            loading="lazy"
+            title="{{ reel.title | escape }}"
+            src="https://www.youtube-nocookie.com/embed/{{ reel.youtube_id | escape }}"
+            allowfullscreen
+          ></iframe>
+        {%- elsif reel.thumbnail -%}
+          <img loading="lazy" src="{{ reel.thumbnail | relative_url }}" alt="">
+        {%- endif %}
+        <p>
+          {{ reel.date | escape -}}
+          {%- if reel.description %} · {{ reel.description | escape }}{% endif %}
+        </p>
+        {% if reel.url -%}
+          <a href="{{ reel.url | escape }}">Watch {{ reel.title | escape }}</a>
+        {%- endif %}
+      </article>
+    {% else %}
+      <p class="pending">Match highlights to come.</p>
+    {% endfor %}
+  </section>
+  <section>
+    <h2>Team history</h2>
+    {% for team in sport.teams %}
+      <article class="team">
+        <h3>{{ team.name | escape }}</h3>
+        {% if team.image %}<img loading="lazy" src="{{ team.image | relative_url }}" alt="{{ team.alt | escape }}">{% endif %}
+        <dl class="facts">
+          {% for key in team -%}
+            {%- unless key[0] == 'name' or key[0] == 'image' or key[0] == 'alt' -%}
+              {%- if key[1] %}
+                <div>
+                  <dt>{{ key[0] | capitalize }}</dt>
+                  <dd>{{ key[1] | escape }}</dd>
+                </div>
+              {% endif -%}
+            {%- endunless -%}
+          {%- endfor %}
+        </dl>
+      </article>
+    {% else %}
+      <p class="pending">School and club team history to come.</p>
+    {% endfor %}
+  </section>
+  <section>
+    <h2>Season statistics</h2>
+    {% if sport.seasons.size > 0 %}
+      {% assign keys = 'played,starts,goals,assists,minutes' | split: ',' -%}
+      {%- assign seasons = sport.seasons | sort: 'season' %}
+      <div class="scroll-table" role="region" aria-label="Season statistics" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Team</th>
+              <th>Games played</th>
+              <th>Games started</th>
+              <th>Goals</th>
+              <th>Assists</th>
+              <th>Minutes played</th>
+              <th>{{ sport.extra_stat_label | escape }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in seasons %}
+              <tr>
+                <th scope="row">{{ row.season | escape }}</th>
+                <td>{{ row.team | escape }}</td>
+                {% for key in keys %}
+                  <td>{{ row[key] | default: '—' }}</td>
+                {% endfor %}
+                <td>{{ row.extra | default: '—' | escape }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+          <tfoot>
+            <tr>
+              <th colspan="2">Career totals</th>
+              {% for key in keys -%}
+                {%- assign total = 0 -%}
+                {%- assign complete = true -%}
+                {%- for row in seasons -%}
+                  {%- if row[key] == null %}{% assign complete = false %}{% endif -%}
+                  {%- assign total = total | plus: row[key] -%}
+                {%- endfor %}
+                <td>
+                  {% if complete %}{{ total }}{% else %}—{% endif %}
+                </td>
+              {% endfor %}
+              <td>—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    {% else %}
+      <p class="pending">Season results to come.</p>
+    {% endif %}
+  </section>
+  {% include_relative _parts/gallery.html %}
+</div>

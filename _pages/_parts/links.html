@@ -1,0 +1,5 @@
+{% for link in links -%}
+  {%- if link.url and link.label -%}
+    <a class="external-profile" href="{{ link.url | escape }}"><span aria-hidden="true">↗</span> {{ link.label | escape }}</a>
+  {%- endif -%}
+{%- endfor %}

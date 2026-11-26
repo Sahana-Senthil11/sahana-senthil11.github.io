@@ -1,0 +1,72 @@
+---
+layout: default
+title: Contact Me
+permalink: /contact/
+description: Recruiting contact information for college soccer and track coaches.
+nav: true
+nav_order: 3
+---
+{% include_relative _parts/start.html %}
+<div class="recruit">
+  {% assign contact = athlete.contact %}
+  <header>
+    <p class="kicker">College recruiting</p>
+    <h1>Contact me</h1>
+    <p class="leadline">I welcome inquiries from college coaches and recruiters about soccer, track and field, and academic opportunities.</p>
+  </header>
+  <section>
+    <h2>{{ full_name | escape }}</h2>
+    <dl class="facts">
+      {% if athlete.school %}
+        <div>
+          <dt>High school</dt>
+          <dd>{{ athlete.school | escape }}</dd>
+        </div>
+      {% endif -%}
+      {%- if athlete.graduation_year %}
+        <div>
+          <dt>Graduation year</dt>
+          <dd>{{ athlete.graduation_year }}</dd>
+        </div>
+      {% endif -%}
+      {%- if contact.location %}
+        <div>
+          <dt>Location</dt>
+          <dd>{{ contact.location | escape }}</dd>
+        </div>
+      {% endif %}
+    </dl>
+    {% if contact.email %}
+      <p>
+        <a href="mailto:{{ contact.email | escape }}"><span aria-hidden="true">✉</span> {{ contact.email | escape }}</a>
+      </p>
+    {% endif %}
+    {% if contact.phone %}
+      <p>
+        <a href="tel:{{ contact.phone | remove: ' ' | escape }}"><span aria-hidden="true">☎</span> {{ contact.phone | escape }}</a>
+      </p>
+    {% endif %}
+    {% unless contact.email or contact.phone %}
+      <p class="pending">Recruiting contact details to come.</p>
+    {% endunless %}
+  </section>
+  {% if contact.coach_name or contact.coach_email or contact.coach_phone %}
+    <section>
+      <h2>Coach contact</h2>
+      <p>{{ contact.coach_name | escape }}</p>
+      {% if contact.coach_email -%}
+        <a href="mailto:{{ contact.coach_email | escape }}">Email coach</a>
+      {%- endif %}
+      {% if contact.coach_phone -%}
+        <a href="tel:{{ contact.coach_phone | remove: ' ' | escape }}">Call coach</a>
+      {%- endif %}
+    </section>
+  {% endif %}
+  {% assign links = site.data.soccer.profiles | concat: site.data.track.profiles | concat: contact.social -%}
+  {%- if links.size > 0 %}
+    <section>
+      <h2>Recruiting and social profiles</h2>
+      {% include_relative _parts/links.html %}
+    </section>
+  {% endif %}
+</div>

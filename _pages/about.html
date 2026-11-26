@@ -1,0 +1,77 @@
+---
+layout: default
+title: About Me
+permalink: /
+description: Meet Sahana Senthil and explore academics, honors, and recruiting profiles for soccer and track.
+---
+{% include_relative _parts/start.html %}
+<div class="recruit">
+  <header class="intro">
+    <div>
+      <p class="kicker">Student-athlete portfolio</p>
+      <h1>{{ full_name | escape }}</h1>
+      <p class="leadline">Soccer &amp; Track and Field</p>
+      {% if athlete.school %}
+        <p>{{ athlete.school | escape }}</p>
+      {% endif -%}
+      {%- if athlete.graduation_year %}
+        <p>Class of {{ athlete.graduation_year }}</p>
+      {% endif %}
+      <p>{{ athlete.bio | default: 'Personal biography to come.' | escape }}</p>
+      {% if athlete.interests %}
+        <p><strong>Interests</strong> · {{ athlete.interests | escape }}</p>
+      {% endif %}
+      {% if athlete.goals %}
+        <p><strong>Future goals</strong> · {{ athlete.goals | escape }}</p>
+      {% endif %}
+    </div>
+    <figure class="portrait">
+      {% if athlete.portrait -%}
+        <img src="{{ athlete.portrait | relative_url }}" alt="{{ athlete.portrait_alt | default: full_name | escape }}">
+      {%- else -%}
+        <span aria-hidden="true">
+          {{- site.first_name | slice: 0 -}}
+          {{- site.last_name | slice: 0 -}}
+        </span>
+        <figcaption>Profile photo to come</figcaption>
+      {% endif %}
+    </figure>
+  </header>
+  <div class="sports-links">
+    <a href="{{ '/soccer/' | relative_url }}"><img src="{{ '/assets/img/soccer/pitch.jpg' | relative_url }}" alt=""><strong>Soccer</strong></a
+    ><a href="{{ '/track/' | relative_url }}"><img src="{{ '/assets/img/track/race.jpg' | relative_url }}" alt=""><strong>Track</strong></a>
+  </div>
+  <section>
+    <h2>Academic profile</h2>
+    <dl class="metrics">
+      {% for metric in athlete.academics %}
+        <div>
+          <dt>{{ metric[0] }}</dt>
+          <dd>{{ metric[1] | default: 'Pending' | escape }}</dd>
+        </div>
+      {% endfor %}
+    </dl>
+    {% if athlete.coursework.size > 0 %}
+      <h3>Advanced coursework</h3>
+      <p>{{ athlete.coursework | join: ', ' | escape }}</p>
+    {% endif %}
+    {% if athlete.major %}
+      <p><strong>Intended major</strong> · {{ athlete.major | escape }}</p>
+    {% endif %}
+  </section>
+  <section>
+    <h2>Awards and honors</h2>
+    {% assign count = 0 -%}
+    {%- for category in athlete.awards -%}
+      {%- assign honors = category[1] -%}
+      {%- if honors.size > 0 -%}
+        {%- assign count = count | plus: honors.size %}
+        <h3>{{ category[0] }}</h3>
+        {% include_relative _parts/honors.html -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if count == 0 %}
+      <p class="pending">Academic, athletic, leadership, and service honors to come.</p>
+    {% endif %}
+  </section>
+</div>

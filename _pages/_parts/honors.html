@@ -1,0 +1,15 @@
+<div class="honors">
+  {% for award in honors %}
+    <article>
+      <h3>{{ award.name | escape }}</h3>
+      <p>
+        {{ award.organization | escape -}}
+        {%- if award.year %} · {{ award.year }}{% endif %}
+      </p>
+      {% if award.description %}
+        <p>{{ award.description | escape }}</p>
+      {% endif -%}
+      {%- if award.photo %}<img loading="lazy" src="{{ award.photo | relative_url }}" alt="{{ award.alt | escape }}">{% endif %}
+    </article>
+  {% endfor %}
+</div>

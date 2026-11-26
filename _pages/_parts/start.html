@@ -1,0 +1,4 @@
+{% assign athlete = site.data.athlete %}
+{% capture full_name %}{{ site.first_name }} {% if site.middle_name %}{{ site.middle_name }} {% endif %}{{ site.last_name }}{% endcapture %}
+<link rel="stylesheet" href="{{ '/assets/css/sports-portfolio.css' | relative_url }}">
+{% assign sport = site.data[page.sport] %}

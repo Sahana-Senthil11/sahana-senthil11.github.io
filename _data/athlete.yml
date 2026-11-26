@@ -1,0 +1,30 @@
+# Name is shared with the theme via _config.yml (first_name, middle_name, last_name).
+school:
+graduation_year:
+bio:
+interests:
+goals:
+portrait:
+portrait_alt:
+academics:
+  Weighted GPA:
+  Unweighted GPA:
+  Class rank:
+  SAT:
+  ACT:
+coursework: []
+major:
+# Each award has name, organization, year, description and optional photo, alt.
+awards:
+  Academic awards: []
+  Athletic awards: []
+  Leadership awards: []
+  Community service and extracurricular achievements: []
+contact:
+  email:
+  phone:
+  location:
+  coach_name:
+  coach_email:
+  coach_phone:
+  social: [] # Each link has label and url.

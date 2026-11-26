@@ -1,0 +1,122 @@
+---
+layout: default
+title: Track
+permalink: /track/
+description: Track and field events, personal records, season progression, achievements, and competition photos.
+nav: true
+nav_order: 2
+sport: track
+profile_heading: Athlete profile
+cover: /assets/img/track/race.jpg
+---
+{% include_relative _parts/start.html %}
+<div class="recruit">
+  {% include_relative _parts/sport-intro.html %}
+  <section>
+    <h2>Personal records</h2>
+    {% if sport.records.size > 0 %}
+      <dl class="metrics">
+        {% for row in sport.records -%}
+          {%- if row.featured %}
+            <div>
+              <dt>{{ row.event | escape }}</dt>
+              <dd>{{ row.mark | escape }}</dd>
+            </div>
+          {% endif -%}
+        {%- endfor %}
+      </dl>
+      <div class="scroll-table" role="region" aria-label="Personal records" tabindex="0">
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Personal record</th>
+              <th>Indoor / outdoor</th>
+              <th>Meet</th>
+              <th>Date achieved</th>
+              <th>Season</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in sport.records %}
+              <tr>
+                <th scope="row">{{ row.event | escape }}</th>
+                <td>{{ row.mark | escape }}</td>
+                <td>{{ row.venue | escape }}</td>
+                <td>{{ row.meet | escape }}</td>
+                <td>{{ row.date | escape }}</td>
+                <td>{{ row.season | escape }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="pending">Verified event marks to come.</p>
+    {% endif %}
+  </section>
+  <section>
+    <h2>Season progression</h2>
+    {% assign ordered = sport.performances | sort: 'date' -%}
+    {%- assign events = ordered | group_by: 'event' -%}
+    {%- for event in events %}
+      <h3>{{ event.name | escape }}</h3>
+      <div class="scroll-table" tabindex="0" role="region" aria-label="{{ event.name | escape }} performances">
+        <table>
+          <thead>
+            <tr>
+              <th>Season</th>
+              <th>Date</th>
+              <th>Meet</th>
+              <th>Performance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in event.items %}
+              <tr>
+                <th scope="row">{{ row.season | escape }}</th>
+                <td>{{ row.date | escape }}</td>
+                <td>{{ row.meet | escape }}</td>
+                <td>
+                  {{ row.mark | escape -}}
+                  {%- if row.season_best %} · Season best{% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% assign bests = event.items | where: 'season_best', true | where_exp: 'r', 'r.chart_value > 0' -%}
+      {%- if bests.size > 1 -%}
+        {%- assign max = bests | sort: 'chart_value' | last %}
+        <figure class="progression">
+          <figcaption>Season bests · {{ event.name | escape }} ({{ max.unit | escape }})</figcaption>
+          {% for r in bests %}
+            <div>
+              <span>{{ r.season | escape }}</span
+              ><meter
+                min="0"
+                max="{{ max.chart_value }}"
+                value="{{ r.chart_value }}"
+                aria-label="{{ event.name | escape }}, {{ r.season | escape }}"
+              ></meter
+              ><span>{{ r.mark | escape }}</span>
+            </div>
+          {% endfor %}
+        </figure>
+      {% endif %}
+    {% else %}
+      <p class="pending">Meet results and season bests to come.</p>
+    {% endfor %}
+  </section>
+  <section>
+    <h2>Track achievements</h2>
+    {% assign honors = sport.achievements -%}
+    {%- if honors.size > 0 -%}
+      {%- include_relative _parts/honors.html -%}
+    {%- else %}
+      <p class="pending">Championship placements, qualifications, and honors to come.</p>
+    {% endif %}
+  </section>
+  {% include_relative _parts/gallery.html %}
+</div>

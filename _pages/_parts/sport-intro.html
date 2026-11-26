@@ -1,0 +1,25 @@
+<header class="sport-cover">
+  <img alt="" src="{{ page.cover | relative_url }}" fetchpriority="high">
+  <div>
+    <p class="kicker">{{ full_name | escape }}</p>
+    <h1>{{ page.title }}</h1>
+  </div>
+</header>
+<section>
+  <h2>{{ page.profile_heading }}</h2>
+  {% capture fields %}
+    {% for field in sport.profile %}
+      {% if field[1] %}<div><dt>{{ field[0] }}</dt><dd>{{ field[1] | escape }}</dd></div>{% endif %}
+    {% endfor %}
+    {% if athlete.school %}<div><dt>High school</dt><dd>{{ athlete.school | escape }}</dd></div>{% endif %}
+    {% if athlete.graduation_year %}<div><dt>Graduation year</dt><dd>{{ athlete.graduation_year }}</dd></div>{% endif %}
+  {% endcapture %}
+  {% assign fields = fields | strip %}
+  {% if fields != '' %}
+    <dl class="facts">{{ fields }}</dl>
+  {% else %}
+    <p class="pending">Recruiting details to come.</p>
+  {% endif %}
+  {% assign links = sport.profiles -%}
+  {%- include_relative _parts/links.html %}
+</section>

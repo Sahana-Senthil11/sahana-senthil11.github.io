@@ -1,0 +1,14 @@
+profile:
+  Primary position:
+  Secondary position:
+  Jersey number:
+  Height:
+  Dominant foot:
+  Current team:
+  Years played:
+profiles: [] # Links with label and url, including Hudl.
+reels: [] # title, youtube_id or url, description, date, optional thumbnail
+teams: [] # name, designation, league, level, years, position, accomplishments, optional image, alt
+seasons: [] # season, team, played, starts, goals, assists, minutes, extra
+extra_stat_label: Position-specific stats
+photos: [] # image, alt, optional caption

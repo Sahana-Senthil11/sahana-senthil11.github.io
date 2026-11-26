@@ -1,0 +1,9 @@
+profile:
+  Current team:
+  Primary events:
+  Years competing:
+profiles: [] # Links with label and url, including MileSplit and Athletic.net.
+records: [] # event, mark, venue, meet, date, season, featured (true or false)
+performances: [] # event, season, date, meet, mark, season_best, optional chart_value and unit
+achievements: [] # name, organization, year, description
+photos: [] # image, alt, optional caption
