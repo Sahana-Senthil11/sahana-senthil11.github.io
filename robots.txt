@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://sahana-senthil11.github.io/al-folio/sitemap.xml
